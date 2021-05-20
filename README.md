@@ -71,7 +71,7 @@ circular contigs even with the “short” DNA fragments from the zymo
 library. Here the assembly graph is visualised using bandage. I used the
 three chromosomes for comparison
 
-![](data/zymo/flye_nano_corr_assembly_graph.png)
+![](data/flye_nano_corr_assembly_graph.png)
 
 ## Lactobacillus fermentum
 
@@ -622,7 +622,7 @@ ctg\_61\_flye\_racon1x
 </tbody>
 </table>
 
-# IDEEL analyses
+# IDEEL analyses (<https://github.com/mw55309/ideel>)
 
 ### Lactobacillus fermentum - How many of the genes are full length?
 
