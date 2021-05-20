@@ -3,7 +3,7 @@ README
 Rasmus Kirkegaard
 20 May, 2021
 
-# Test sequencing the Zymo mock community using “Q20EA” chemsitry by Oxford Nanopore
+# Can nanopore really produce Q20 quality single pass reads?
 
 We were lucky to be offered to try the new “Q20” chemistry ahead of the
 wide release. This post shows what the data looked like at the time we
@@ -11,27 +11,45 @@ got it and might not reflect the performance when the kit enters a wide
 release as basecalling algorithms etc might have been fine tuned in the
 meantime. The main selling point with this chemistry+bonito basecalling
 was improved single pass accuracy. To evaluate the accuracy we sequenced
-the zymo mock community where a known reference is available so it is
-possible to determine how well the basecalled reads reflect the genomes.
-The sequencing was carried out on the Promethion P24 platform with the
-Zymo mock DNA directly from supplier without any pretreatment (no short
-read elimination). The DNA fragments have a peak around 7 kbp but with a
-tail of short fragments. To maximise yield the short fragments would
-ideally have been removed but since the DNA material was limited I
-omitted this as I figured that a Promethion Flowcell would anyway
-generate plenty of data to check the quality of the reads for this low
-complexity sample.
+the zymo mock community where a known reference genome is available for
+all of the organisms so it is possible to determine how well the
+basecalled reads reflect the genomes. The sequencing was carried out on
+the Promethion P24 platform with the Zymo mock DNA directly from
+supplier without any pretreatment (no short read elimination). The DNA
+fragments have a peak around 7 kbp but with a tail of short fragments.
+To maximise yield the short fragments would ideally have been removed
+but since the DNA material was limited I omitted this as I figured that
+a Promethion Flowcell would anyway generate plenty of data to check the
+quality of the reads for this low complexity sample.
+
+# Conclusion - YES!
+
+Yes the overall modal alignment accuracy was already 99 % with this
+release when tested with the zymo mock community. There are still some
+species specific variations but the read quality is generally really
+good. The best chromosome contig recovered had an indel rate of
+0.74/100kbp and mismatch rate of 0.37/100kbp, which is pretty mind
+blowing for a nanopore only assembly!!! The estimated ANI value was
+99.9989 %! Polishing this metagenome assembly with racon did not seem to
+improve the quality of the best contig. A medaka model was not available
+and will likely be tricky to develop for contigs with this quality
+directly from the assembler. I assume that improvements in the
+basecalling models will bring the others on par with this in the future.
+
+# Data availability
+
+I have uploaded the basecalled data and the fast5 files to the ENA
+[PRJEB43406](https://www.ebi.ac.uk/ena/browser/view/PRJEB43406). For
+illumina data I grabbed the reads from [Lomans mock community
+blogpost](https://lomanlab.github.io/mockcommunity/).
+
+------------------------------------------------------------------------
 
 # DNA input size distribution
 
 The DNA size distribution was checked using a genomic screentape.
 
 ![](data/Zymo_mock_size_distribution_genomic_screentape.jpg)
-
-# Data availability
-
-I have uploaded the basecalled data and the fast5 files to the ENA
-[PRJEB43406](https://www.ebi.ac.uk/ena/browser/view/PRJEB43406).
 
 # Basecalling with bonito (v. 0.3.5)
 
@@ -75,581 +93,32 @@ three chromosomes for comparison
 
 ## Lactobacillus fermentum
 
-<table class=" lightable-paper lightable-striped" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Bin.Id
-</th>
-<th style="text-align:left;">
-\# contigs
-</th>
-<th style="text-align:left;">
-Total length
-</th>
-<th style="text-align:right;">
-Completeness
-</th>
-<th style="text-align:right;">
-Contamination
-</th>
-<th style="text-align:left;">
-MM100kb
-</th>
-<th style="text-align:left;">
-Indel100kb
-</th>
-<th style="text-align:right;">
-ANI
-</th>
-<th style="text-align:right;">
-ANI Phred
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Lactobacillus\_fermentum
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-1905333
-</td>
-<td style="text-align:right;">
-99.18
-</td>
-<td style="text-align:right;">
-0.55
-</td>
-<td style="text-align:left;">
-0.00
-</td>
-<td style="text-align:left;">
-0.00
-</td>
-<td style="text-align:right;">
-100.0000
-</td>
-<td style="text-align:right;">
-Inf
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-ctg\_1\_flye
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-1891256
-</td>
-<td style="text-align:right;">
-98.72
-</td>
-<td style="text-align:right;">
-0.55
-</td>
-<td style="text-align:left;">
-16.87
-</td>
-<td style="text-align:left;">
-1.96
-</td>
-<td style="text-align:right;">
-99.9724
-</td>
-<td style="text-align:right;">
-36
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-ctg\_1\_flye\_racon2x\_raconILM
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-1890579
-</td>
-<td style="text-align:right;">
-99.54
-</td>
-<td style="text-align:right;">
-0.55
-</td>
-<td style="text-align:left;">
-17.72
-</td>
-<td style="text-align:left;">
-4.02
-</td>
-<td style="text-align:right;">
-99.9721
-</td>
-<td style="text-align:right;">
-36
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-ctg\_1\_flye\_racon1x
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-1890853
-</td>
-<td style="text-align:right;">
-98.45
-</td>
-<td style="text-align:right;">
-0.55
-</td>
-<td style="text-align:left;">
-18.03
-</td>
-<td style="text-align:left;">
-7.46
-</td>
-<td style="text-align:right;">
-99.9665
-</td>
-<td style="text-align:right;">
-34
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-ctg\_1\_flye\_racon2x
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-1890398
-</td>
-<td style="text-align:right;">
-99.00
-</td>
-<td style="text-align:right;">
-0.55
-</td>
-<td style="text-align:left;">
-18.25
-</td>
-<td style="text-align:left;">
-7.99
-</td>
-<td style="text-align:right;">
-99.9662
-</td>
-<td style="text-align:right;">
-34
-</td>
-</tr>
-</tbody>
-</table>
+![](README_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
 ## Pseudomonas aeruginosa
 
-<table class=" lightable-paper lightable-striped" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Bin.Id
-</th>
-<th style="text-align:left;">
-\# contigs
-</th>
-<th style="text-align:left;">
-Total length
-</th>
-<th style="text-align:right;">
-Completeness
-</th>
-<th style="text-align:right;">
-Contamination
-</th>
-<th style="text-align:left;">
-MM100kb
-</th>
-<th style="text-align:left;">
-Indel100kb
-</th>
-<th style="text-align:right;">
-ANI
-</th>
-<th style="text-align:right;">
-ANI Phred
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Pseudomonas\_aeruginosa
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-6792330
-</td>
-<td style="text-align:right;">
-99.68
-</td>
-<td style="text-align:right;">
-0.61
-</td>
-<td style="text-align:left;">
-0.00
-</td>
-<td style="text-align:left;">
-0.00
-</td>
-<td style="text-align:right;">
-100.0000
-</td>
-<td style="text-align:right;">
-Inf
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-ctg\_16\_flye\_racon2x\_raconILM
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-6792228
-</td>
-<td style="text-align:right;">
-99.65
-</td>
-<td style="text-align:right;">
-0.61
-</td>
-<td style="text-align:left;">
-9.13
-</td>
-<td style="text-align:left;">
-0.66
-</td>
-<td style="text-align:right;">
-99.9929
-</td>
-<td style="text-align:right;">
-49
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-ctg\_16\_flye
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-6792141
-</td>
-<td style="text-align:right;">
-99.68
-</td>
-<td style="text-align:right;">
-0.61
-</td>
-<td style="text-align:left;">
-9.13
-</td>
-<td style="text-align:left;">
-1.13
-</td>
-<td style="text-align:right;">
-99.9927
-</td>
-<td style="text-align:right;">
-49
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-ctg\_16\_flye\_racon2x
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-6791974
-</td>
-<td style="text-align:right;">
-99.35
-</td>
-<td style="text-align:right;">
-0.61
-</td>
-<td style="text-align:left;">
-9.19
-</td>
-<td style="text-align:left;">
-2.83
-</td>
-<td style="text-align:right;">
-99.9900
-</td>
-<td style="text-align:right;">
-46
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-ctg\_16\_flye\_racon1x
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-6791962
-</td>
-<td style="text-align:right;">
-99.68
-</td>
-<td style="text-align:right;">
-0.61
-</td>
-<td style="text-align:left;">
-9.22
-</td>
-<td style="text-align:left;">
-3.06
-</td>
-<td style="text-align:right;">
-99.9894
-</td>
-<td style="text-align:right;">
-45
-</td>
-</tr>
-</tbody>
-</table>
+![](README_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 
 ## Staphylococcus aureus
 
-<table class=" lightable-paper lightable-striped" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Bin.Id
-</th>
-<th style="text-align:left;">
-\# contigs
-</th>
-<th style="text-align:left;">
-Total length
-</th>
-<th style="text-align:right;">
-Completeness
-</th>
-<th style="text-align:right;">
-Contamination
-</th>
-<th style="text-align:left;">
-MM100kb
-</th>
-<th style="text-align:left;">
-Indel100kb
-</th>
-<th style="text-align:right;">
-ANI
-</th>
-<th style="text-align:right;">
-ANI Phred
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Staphylococcus\_aureus
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-2718780
-</td>
-<td style="text-align:right;">
-99.67
-</td>
-<td style="text-align:right;">
-0.08
-</td>
-<td style="text-align:left;">
-0.00
-</td>
-<td style="text-align:left;">
-0.00
-</td>
-<td style="text-align:right;">
-100.0000
-</td>
-<td style="text-align:right;">
-Inf
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-ctg\_61\_flye
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-2718703
-</td>
-<td style="text-align:right;">
-99.67
-</td>
-<td style="text-align:right;">
-0.08
-</td>
-<td style="text-align:left;">
-0.37
-</td>
-<td style="text-align:left;">
-0.74
-</td>
-<td style="text-align:right;">
-99.9989
-</td>
-<td style="text-align:right;">
-68
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-ctg\_61\_flye\_racon2x\_raconILM
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-2718746
-</td>
-<td style="text-align:right;">
-99.67
-</td>
-<td style="text-align:right;">
-0.08
-</td>
-<td style="text-align:left;">
-0.33
-</td>
-<td style="text-align:left;">
-2.69
-</td>
-<td style="text-align:right;">
-99.9968
-</td>
-<td style="text-align:right;">
-57
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-ctg\_61\_flye\_racon2x
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-2718521
-</td>
-<td style="text-align:right;">
-99.42
-</td>
-<td style="text-align:right;">
-0.08
-</td>
-<td style="text-align:left;">
-0.55
-</td>
-<td style="text-align:left;">
-7.80
-</td>
-<td style="text-align:right;">
-99.9917
-</td>
-<td style="text-align:right;">
-48
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-ctg\_61\_flye\_racon1x
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-2718506
-</td>
-<td style="text-align:right;">
-99.67
-</td>
-<td style="text-align:right;">
-0.08
-</td>
-<td style="text-align:left;">
-0.77
-</td>
-<td style="text-align:left;">
-8.50
-</td>
-<td style="text-align:right;">
-99.9896
-</td>
-<td style="text-align:right;">
-46
-</td>
-</tr>
-</tbody>
-</table>
+![](README_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
 
 # IDEEL analyses (<https://github.com/mw55309/ideel>)
-
-### Lactobacillus fermentum - How many of the genes are full length?
 
 To ensure that indel errors left from the nanopore data do not cause
 genes to break we can compare the gene length with that of the best hit
 to a reference gene. Most genes appear to have a length that is similar
-to the best BLAST hit in the reference database indicated by a relative
-gene length of 1.
+to the best “BLAST” (DIAMOND) hit in the reference database indicated by
+a relative gene length of 1.
+
+### Lactobacillus fermentum - How many of the genes are full length?
 
 ![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
 
 ### Pseudomonas aeruginosa - How many of the genes are full length?
 
-To ensure that indel errors left from the nanopore data do not cause
-genes to break we can compare the gene length with that of the best hit
-to a reference gene. Most genes appear to have a length that is similar
-to the best BLAST hit in the reference database indicated by a relative
-gene length of 1.
-
 ![](README_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
 
 ### Staphylococcus aureus - How many of the genes are full length?
-
-To ensure that indel errors left from the nanopore data do not cause
-genes to break we can compare the gene length with that of the best hit
-to a reference gene. Most genes appear to have a length that is similar
-to the best BLAST hit in the reference database indicated by a relative
-gene length of 1.
 
 ![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
